@@ -3,6 +3,9 @@ export enum AppError {
     UserAlreadyExists,
     CannotCreateMoreAdmins,
     CannotSaveUser,
+    UserDataIsMissing,
+    UserPasswordTooShort,
+    InvalidRole,
 }
 
 export class CreateUserResult {
@@ -25,6 +28,10 @@ export class CreateUserResult {
     }
 
     static cannotSaveUser() {
+        return new CreateUserResult(AppError.CannotSaveUser)
+    }
+
+    static userDataIsMissing() {
         return new CreateUserResult(AppError.CannotSaveUser)
     }
 }
