@@ -1,4 +1,4 @@
-import { Request, Response, Router } from 'express'
+import { Request, Response } from 'express'
 import { CreateUserUseCase } from "../../application/CreateUserUseCase";
 import { User } from "../../domain/User";
 import { EmptyDataNotAllowedError, PasswordTooShortError } from "../../application/Errors";
@@ -13,7 +13,7 @@ export class UserController {
         const { username, password, role } = req.body
 
         try {
-            const createUserResult = this.createUserUseCase.execute(User.from(username, password, role))
+            const createUserResult = this.createUserUseCase.execute(new User(username, password, role))
             switch (createUserResult.error) {
                 case null:
                     return res.status(201).send()
